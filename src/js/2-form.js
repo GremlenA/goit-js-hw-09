@@ -7,7 +7,7 @@ const formData = {
 
 const form = document.querySelector('.feedback-form');
 
-// Відновлює дані з localStorage при завантаженні сторінки
+
 function restoreFormState() {
   const savedData = localStorage.getItem(STORAGE_KEY);
   if (!savedData) return;
@@ -29,7 +29,7 @@ function restoreFormState() {
   }
 }
 
-// Оновлює formData і зберігає в localStorage при вводі
+
 function handleInput(event) {
   const { name, value } = event.target;
 
@@ -39,11 +39,11 @@ function handleInput(event) {
   }
 }
 
-// Обробка submit з перевіркою і очищенням
+
 function handleSubmit(event) {
   event.preventDefault();
 
-  // ОНОВЛЮЄМО formData прямо перед перевіркою
+ 
   formData.email = form.elements.email.value.trim();
   formData.message = form.elements.message.value.trim();
 
@@ -52,19 +52,19 @@ function handleSubmit(event) {
     return;
   }
 
-  // Все заповнено — виводимо об'єкт
+ 
   console.log('Form submitted:', { ...formData });
 
-  // Очищаємо форму, локальне сховище і formData
+
   localStorage.removeItem(STORAGE_KEY);
   form.reset();
   formData.email = '';
   formData.message = '';
 }
 
-// Додаємо обробники
+
 form.addEventListener('input', handleInput);
 form.addEventListener('submit', handleSubmit);
 
-// Відновлення стану при завантаженні
+
 restoreFormState();
