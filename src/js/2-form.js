@@ -8,6 +8,12 @@ const formData = {
 const form = document.querySelector('.feedback-form');
 
 
+restoreFormState();
+
+
+form.addEventListener('input', handleInput);
+form.addEventListener('submit', handleSubmit);
+
 function restoreFormState() {
   const savedData = localStorage.getItem(STORAGE_KEY);
   if (!savedData) return;
@@ -29,7 +35,6 @@ function restoreFormState() {
   }
 }
 
-
 function handleInput(event) {
   const { name, value } = event.target;
 
@@ -39,11 +44,9 @@ function handleInput(event) {
   }
 }
 
-
 function handleSubmit(event) {
   event.preventDefault();
 
- 
   formData.email = form.elements.email.value.trim();
   formData.message = form.elements.message.value.trim();
 
@@ -52,19 +55,10 @@ function handleSubmit(event) {
     return;
   }
 
- 
   console.log('Form submitted:', { ...formData });
-
 
   localStorage.removeItem(STORAGE_KEY);
   form.reset();
   formData.email = '';
   formData.message = '';
 }
-
-
-form.addEventListener('input', handleInput);
-form.addEventListener('submit', handleSubmit);
-
-
-restoreFormState();
